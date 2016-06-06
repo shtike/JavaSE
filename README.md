@@ -5,10 +5,9 @@
 ## Необходимое ПО
 -  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">JDK8</a>
 -  <a href="http://git-scm.com/downloads">Git</a>
--  Аккаунт <a href="https://github.com/">GitHub</a>
 -  <a href="http://www.jetbrains.com/idea/download/index.html">IntelliJ IDEA</a>
 
-> Выбирать Ultimate, 30 days trial (нам понадобится Git, JavaScript, Tomcat, JSP). Учебный ключ выдается на первом занятии.
+> Можно поставить Community или Ultimate, 30 days trial. Позже потребуется Ultimate (работа с JavaScript, Tomcat, JSP). Учебный ключ к Ultimate выдается на первом занятии.
 
 ## Рекомендуемые книги
 - <a href="http://myflex.org/books/java4kids/java4kids.htm">YAKOV FAIN: Программирование на Java для начинающих</a>

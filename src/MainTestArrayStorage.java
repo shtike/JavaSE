@@ -1,7 +1,7 @@
 /**
  * Test for com.urise.webapp.storage.ArrayStorage
  */
-public class MainArray {
+public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {

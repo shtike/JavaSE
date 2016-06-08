@@ -1,6 +1,11 @@
 ## <a href="http://java.u-rise.com/">4-х месячный Онлайн Курс по Java SE с собственным проектом на выходе</a>
 
 # Вступительное занятие
+-  <a href="http://www.tiobe.com/tiobe_index">TIOBE Index for June 2016</a>
+-  <a href="https://plumbr.eu/blog/java/java-version-and-vendor-data-analyzed-2016-edition">Java version and vendor data analyzed</a>
+-  <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014">Java Tools and Technologies Landscape </a>
+-  <a href="https://djinni.co/salaries">Зарплаты на Джинне</a>
+-  <a href="http://stackoverflow.com/research/developer-survey-2015#work-compensation-geo">Stackoverflow developer survey</a>
 
 ## Необходимое ПО
 -  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">JDK8</a>

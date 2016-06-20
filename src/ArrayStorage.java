@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Collections;
+
 /**
  * Array based storage for Resumes
  */
@@ -32,35 +33,33 @@ public class ArrayStorage {
     }
 
 
-
     Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuis must not be null");
         for (int i = 0; i < size; i++) {
-            Resume resume = storage[i];
-            if (resume != null && uuid.equals(resume.uuid)) {
-                return resume;
-            } else {
-                System.out.println("TAKOGO UUID NET");
-                break;
+
+            if (uuid.equals(storage[i].uuid)) {
+                return storage[i];
+
             }
+
         }
         return null;
     }
 
-  /*  int getIndex(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == uuid) {
+  int getIndex(String uuid) {
+          for (int i = 0; i < size; i++) {
+              if (storage[i].uuid == uuid) {
 
-                return i+1;
-            }
-        }
-        return -1;
-    }
-*/
+                  return i;
+              }
+          }
+          return -1;
+      }
+
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == uuid) {
-                storage[i] = storage[size - 1];
+            if (storage[getIndex(uuid)].uuid == uuid) {
+                storage[getIndex(uuid)] = storage[size - 1];
                 storage[size - 1] = null;
                 size--;
                 return;
@@ -69,7 +68,6 @@ public class ArrayStorage {
         }
         System.out.println("Resume not exist");
     }
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */

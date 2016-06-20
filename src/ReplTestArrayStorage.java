@@ -13,7 +13,7 @@ public class ReplTestArrayStorage {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String uuid = null;
         while (true) {
-            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | getIndex uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
             if (params.length < 1 || params.length > 2) {
                 System.out.println("Неверная команда.");
@@ -27,7 +27,7 @@ public class ReplTestArrayStorage {
                     printAll();
                     break;
                 case "size":
-                    System.out.println(ARRAY_STORAGE.size());
+                    System.out.println(ARRAY_STORAGE.size);
                     break;
                 case "save":
                     Resume r = new Resume();
@@ -46,6 +46,9 @@ public class ReplTestArrayStorage {
                     ARRAY_STORAGE.clear();
                     printAll();
                     break;
+                case "getIndex":
+                //    ARRAY_STORAGE.getIndex(uuid);
+                    break;
                 case "exit":
                     return;
                 default:
@@ -57,7 +60,7 @@ public class ReplTestArrayStorage {
 
     static void printAll() {
         Resume[] all = ARRAY_STORAGE.getAll();
-        System.out.println("----------------------------");
+        System.out.println("---------------------------");
         if (all.length == 0) {
             System.out.println("Empty");
         } else {
@@ -65,6 +68,6 @@ public class ReplTestArrayStorage {
                 System.out.println(r);
             }
         }
-        System.out.println("----------------------------");
+        System.out.println("---------------------------");
     }
 }

@@ -1,6 +1,4 @@
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Collections;
 
 /**
  * Array based storage for Resumes
@@ -18,56 +16,50 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == r.uuid) {
-                System.out.println(" uuid " + r.uuid + " already exists");
-                return;
-            }
-        }
-        if (size < storageSize) {
-            storage[size] = r;
+
+        if (getIndex(r.uuid) != -1)
+            System.out.println("Resume allready exist");
+        else{
+        if (size<storageSize)
+            storage[size]=r;
             size++;
-        } else {
-            System.out.println("Storage Is Full");
-        }
+    }
     }
 
 
     Resume get(String uuid) {
-        Objects.requireNonNull(uuid, "uuis must not be null");
-        for (int i = 0; i < size; i++) {
 
-            if (uuid.equals(storage[i].uuid)) {
-                return storage[i];
+        if (getIndex(uuid) == -1) {
+            System.out.println("Resume not exist");
 
-            }
+            return null;
+        } else
 
-        }
-        return null;
+            return storage[getIndex(uuid)];
+
+
     }
 
-  int getIndex(String uuid) {
-          for (int i = 0; i < size; i++) {
-              if (storage[i].uuid == uuid) {
 
-                  return i;
-              }
-          }
-          return -1;
-      }
+    int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[getIndex(uuid)].uuid == uuid) {
-                storage[getIndex(uuid)] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                return;
-
-            }
+        if (getIndex(uuid) == -1)
+            System.out.println("Resume not exist");
+        else {
+            storage[getIndex(uuid)] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         }
-        System.out.println("Resume not exist");
     }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */

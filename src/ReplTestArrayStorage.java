@@ -1,9 +1,12 @@
+import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.ArrayStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Test for ArrayStorage
+ * Test for com.urise.webapp.storage.ArrayStorage
  * https://ru.wikipedia.org/wiki/REPL
  */
 public class ReplTestArrayStorage {
@@ -65,6 +68,8 @@ public class ReplTestArrayStorage {
                 System.out.println(r);
             }
         }
-        System.out.println("---------------------------");
+        System.out.println("------------------- "+ARRAY_STORAGE.update()+" -------");
+
+
     }
 }

@@ -1,3 +1,7 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -6,19 +10,19 @@ import java.util.Arrays;
 public class ArrayStorage {
     int storageSize = 10000;
     Resume[] storage = new Resume[storageSize];
-    int size = 0;
+   public int size = 0;
 
-    void clear() {
+    public  void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
         size = 0;
     }
 
-    void save(Resume r) {
+    public  void save(Resume r) {
 
-        if (getIndex(r.uuid) != -1)
-            System.out.println("Resume allready exist");
+        if (getIndex(r.getUuid()) != -1)
+            System.out.println("ERROR---------Resume allready exist");
         else{
         if (size<storageSize)
             storage[size]=r;
@@ -27,10 +31,10 @@ public class ArrayStorage {
     }
 
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
 
         if (getIndex(uuid) == -1) {
-            System.out.println("Resume not exist");
+            System.out.println("ERROR----------Resume not exist");
 
             return null;
         } else
@@ -41,18 +45,18 @@ public class ArrayStorage {
     }
 
 
-    int getIndex(String uuid) {
+    public int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
         return -1;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         if (getIndex(uuid) == -1)
-            System.out.println("Resume not exist");
+            System.out.println("ERROR------Resume not exist");
         else {
             storage[getIndex(uuid)] = storage[size - 1];
             storage[size - 1] = null;
@@ -63,11 +67,11 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
 
         return Arrays.copyOfRange(storage, 0, size);
 
-//        Resume[] nepustoy = new Resume[size];
+//        com.urise.webapp.model.Resume[] nepustoy = new com.urise.webapp.model.Resume[size];
 //        for (int i = 0; i < size; i++) {
 //            nepustoy[i] = storage[i];
 //        }
@@ -75,5 +79,9 @@ public class ArrayStorage {
     }
 /**
  * @return array, contains only Resumes in storage (without null)*/
+
+public  int update(){
+    return size;
+}
 
 }

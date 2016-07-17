@@ -69,7 +69,7 @@ public class ReplTestArrayStorage {
                 System.out.println(r);
             }
         }
-        System.out.println("------------------- "+ARRAY_STORAGE.update()+" -------");
+        System.out.println("-------------------  -------");
 
 
     }

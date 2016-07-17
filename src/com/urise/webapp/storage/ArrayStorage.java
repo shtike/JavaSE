@@ -65,6 +65,11 @@ public class ArrayStorage extends AbstractArrayStorage {
 //        return nepustoy;
     }
 
+    @Override
+    public void update() {
+
+    }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -77,11 +82,24 @@ public class ArrayStorage extends AbstractArrayStorage {
         return -1;
     }
 
-    public int update() {
-        return size;
+    public void update(Resume r) {
+
+        int index = getIndex(r.getUuid());
+        if (index ==-1){
+            System.out.println("Resume"+r.getUuid()+"not exist");
+        } else {
+            storage[index] = r;
+        }
+
+
     }
 
     public int size() {
         return size;
+    }
+
+    @Override
+    public int binaryInsert(Resume r) {
+        return 0;
     }
 }

@@ -17,6 +17,8 @@ abstract class AbstractArrayStorage implements Storage {
     }
 
 
+    public abstract int binaryInsert(Resume r);
+
     public Resume get(String uuid) {
 
         if (getIndex(uuid) == -1) {
@@ -26,6 +28,14 @@ abstract class AbstractArrayStorage implements Storage {
         } else
 
             return storage[getIndex(uuid)];
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
+        }
+        size = 0;
     }
 
     protected abstract int getIndex(String uuid);

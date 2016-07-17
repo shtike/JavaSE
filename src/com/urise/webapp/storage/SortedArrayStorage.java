@@ -12,23 +12,36 @@ public class SortedArrayStorage extends AbstractArrayStorage{
 
 
 
+
+
     @Override
-    public void clear() {
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
-        size = 0;
+
+        public int binaryInsert(Resume r ) {
+            if (storageSize == 0)
+                return 0;
+            int lowerBound = 0;
+            int upperBound = storageSize - 1;
+            int seredina = 0;
+            while (true) {
+                seredina = (upperBound + lowerBound) / 2;
+                if (storage[seredina]== r) {
+                    return seredina;
+                } else if (storage[seredina] < r) {
+                    lowerBound = seredina + 1; // its in the upper
+                    if (lowerBound > upperBound)
+                        return seredina + 1;
+                } else {
+                    upperBound = seredina - 1; // its in the lower
+                    if (lowerBound > upperBound)
+                        return seredina;
+                }
+            }
     }
+
 
     @Override
     public void save(Resume r) {
-        if (getIndex(r.getUuid()) != -1)
-            System.out.println("ERROR---------Resume allready exist");
-        else {
-            if (size < storageSize)
-                storage[size] = r;
-            size++;
-        }
+
     }
 
     @Override
@@ -62,11 +75,12 @@ public class SortedArrayStorage extends AbstractArrayStorage{
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
-        return Arrays.binarySearch(storage,0,size,uuid);
+        return Arrays.binarySearch(storage,0,size,searchKey);
     }
     @Override
-    public int update() {
-        return size;
+    public void update() {
+
+
     }
 
 

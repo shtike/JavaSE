@@ -22,7 +22,7 @@ public interface Storage {
     Resume[] getAll();
 
 
-    int update();
+    void update();
 
 }
 

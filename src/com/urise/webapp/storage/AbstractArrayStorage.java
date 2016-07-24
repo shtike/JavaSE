@@ -10,14 +10,16 @@ import java.util.Arrays;
 abstract class AbstractArrayStorage implements Storage {
     protected int storageSize = 10000;
     protected Resume[] storage = new Resume[storageSize];
-    protected int size = 0;
+     int size = 0;
 
     public int size() {
         return size;
     }
 
 
-    public abstract int binaryInsert(Resume r);
+
+
+
 
     public Resume get(String uuid) {
 
@@ -37,6 +39,8 @@ abstract class AbstractArrayStorage implements Storage {
         }
         size = 0;
     }
+
+    public abstract void update(Resume r);
 
     protected abstract int getIndex(String uuid);
 

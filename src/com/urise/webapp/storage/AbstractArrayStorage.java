@@ -10,15 +10,18 @@ import java.util.Arrays;
 abstract class AbstractArrayStorage implements Storage {
     protected int storageSize = 10000;
     protected Resume[] storage = new Resume[storageSize];
-     int size = 0;
+    int size = 0;
 
     public int size() {
         return size;
     }
 
 
-
-
+    public boolean isResumeExist(Resume r) {
+        if (size == storageSize)
+            return true;
+        else return false;
+    }
 
 
     public Resume get(String uuid) {
@@ -28,7 +31,6 @@ abstract class AbstractArrayStorage implements Storage {
 
             return null;
         } else
-
             return storage[getIndex(uuid)];
     }
 
@@ -40,9 +42,24 @@ abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    public abstract void update(Resume r);
 
     protected abstract int getIndex(String uuid);
 
+    public void update(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index > 0) {
+            System.out.println("Resume " + r.getUuid() + " not exist");
+        } else {
+            storage[index] = r;
+        }
+    }
+
+
+    public Resume[] getAll() {
+
+        return Arrays.copyOfRange(storage, 0, size);
+
+
+    }
 }
-   
+

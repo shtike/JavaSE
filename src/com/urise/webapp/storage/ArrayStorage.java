@@ -8,9 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-    int storageSize = 10000;
-    Resume[] storage = new Resume[storageSize];
-    public int size = 0;
+
 
     public void clear() {
         for (int i = 0; i < size; i++) {
@@ -20,9 +18,11 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     public void save(Resume r) {
+        if (isResumeExist(r))
+            System.out.println("ERROR---------Storage is full");
 
-        if (getIndex(r.getUuid()) != -1)
-            System.out.println("ERROR---------Resume allready exist");
+        else if(getIndex(r.getUuid()) != -1)
+            System.out.println("ERROR-------"+ r.getUuid() +"--Resume allready exist");
         else {
             if (size < storageSize)
                 storage[size] = r;
@@ -52,34 +52,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-
-        return Arrays.copyOfRange(storage, 0, size);
-
-//        com.urise.webapp.model.Resume[] nepustoy = new com.urise.webapp.model.Resume[size];
-//        for (int i = 0; i < size; i++) {
-//            nepustoy[i] = storage[i];
-//        }
-//        return nepustoy;
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index ==-1){
-            System.out.println("Resume"+r.getUuid()+"not exist");
-        } else {
-            storage[index] = r;
-        }
-    }
 
     /**
      * @return array, contains only Resumes in storage (without null)
@@ -103,13 +75,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 //        }
 
 
-   // }
-
-    public int size() {
-        return size;
-    }
-
-
+    // }
 
 
 }

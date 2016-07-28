@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
  * https://ru.wikipedia.org/wiki/REPL
  */
 public class ReplTestArrayStorage {
-    static final SortedArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
+    static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,8 +36,15 @@ public class ReplTestArrayStorage {
                     break;
                 case "save":
                     Resume r = new Resume();
-                    r.uuid = uuid;
+                    r.setUuid(params[1]);
+
                     ARRAY_STORAGE.save(r);
+                    printAll();
+                    break;
+                case "update":
+                    r = new Resume();
+                    r.setUuid(params[1]);
+                    ARRAY_STORAGE.update(r);
                     printAll();
                     break;
                 case "delete":
@@ -45,7 +52,7 @@ public class ReplTestArrayStorage {
                     printAll();
                     break;
                 case "get":
-                    System.out.println(ARRAY_STORAGE.get(uuid));
+                    System.out.println(ARRAY_STORAGE.get(params[1]));
                     break;
                 case "clear":
                     ARRAY_STORAGE.clear();

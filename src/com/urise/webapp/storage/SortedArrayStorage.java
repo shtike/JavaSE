@@ -6,13 +6,12 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 /**
  * Created by Admin on 04.07.16.
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
-
-
 
 
     public int binaryInsert(Resume r) {
@@ -38,20 +37,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
 
-//    @Override
-//    public void sortSave(Resume r) {
-//        Arrays.sort(storage,0,size);
-//        Resume[] sortedstor = new Resume[storageSize];
-//        System.arraycopy(storage, 0, sortedstor, 0, storageSize);
-//       System.out.println("tgt"+(sortedstor));
-//    }
-
-
-    @Override
     public void save(Resume r) {
-        int index = Arrays.binarySearch(storage, 0, size, r);
-
-        if (size == storageSize) {
+        // int index = Arrays.binarySearch(storage, 0, size, r);
+        int index = getIndex(r.uuid);
+        if (isResumeExist(r)) {
             System.out.println("Storage overflow");
         } else if (index < 0) {
 
@@ -60,22 +49,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             storage[index] = r;
             size++;
 
-//        if (size == storageSize)
-//            System.out.println("Can not add more elements.");
-//        int index = Arrays.binarySearch(storage, 0, size, r);
-//        System.out.println(index);
-//        if (index < 0) {
-//            // this is a new value to insert (not a duplicate).
-//            index = -index - 1;
-//
-//        }
-//        System.arraycopy(storage, index, storage, index + 1, size - index);
-//        storage[index] = r;
-//        size++;
+        } else {
+            System.out.println("uuid" + r.uuid + "Already exist");
         }
-else{
-            System.out.println("Already exist");}
     }
+
     @Override
     public Resume get(String uuid) {
 
@@ -88,26 +66,25 @@ else{
 
     }
 
-    @Override
-    public void update(Resume r) {
-
-    }
 
     @Override
     public void delete(String uuid) {
-        if (getIndex(uuid) == -1)
+        int index = getIndex(uuid);
+        if (index < 0)
             System.out.println("ERROR------Resume not exist");
         else {
-            storage[getIndex(uuid)] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
+
+            System.arraycopy(storage,index+1,storage,index,storage.length-size-index);
         }
+//            for (int i = index; i < size; i++) {
+//                storage[i] = storage[i + 1];
+//            }
+//            size--;
+//      }
+
+        size--;
     }
 
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
-    }
 
     @Override
     protected int getIndex(String uuid) {
@@ -115,13 +92,6 @@ else{
         searchKey.setUuid(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
-
-    @Override
-    public void update() {
-
-
-    }
-
 
     @Override
     public int size() {

@@ -22,9 +22,10 @@ public interface Storage {
     Resume[] getAll();
 
 
-    void update();
-
+    void update(Resume r);
+    public int size();
 }
+
 
 /**
  * Array based storage for Resumes

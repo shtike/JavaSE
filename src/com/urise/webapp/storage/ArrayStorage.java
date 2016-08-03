@@ -22,7 +22,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("ERROR---------Storage is full");
 
         else if(getIndex(r.getUuid()) != -1)
-            System.out.println("ERROR-------"+ r.getUuid() +"--Resume allready exist");
+            System.out.println("ERROR------- "+ r.getUuid() +" --Resume allready exist");
         else {
             if (size < storageSize)
                 storage[size] = r;

@@ -14,7 +14,7 @@ import java.util.Objects;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
 
-    public int binaryInsert(Resume r) {
+    public int binaryInsertByHand(Resume r) {
         if (storageSize == 0)
             return -1;
         int lowerBound = 0;
@@ -38,21 +38,19 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
 
     public void save(Resume r) {
-        // int index = Arrays.binarySearch(storage, 0, size, r);
-        int index = getIndex(r.uuid);
-        if (isResumeExist(r)) {
+        int index = Arrays.binarySearch(storage, 0, size, r);
+        //  int index = binaryInsertByHand(r);
+        if (size == storageSize) {
             System.out.println("Storage overflow");
         } else if (index < 0) {
-
             index = -index - 1;
             System.arraycopy(storage, index, storage, index + 1, storage.length - index - 1);
             storage[index] = r;
             size++;
-
-        } else {
-            System.out.println("uuid" + r.uuid + "Already exist");
-        }
+        } else
+            System.out.println("uuid " + r.uuid + " alredy exist!");
     }
+
 
     @Override
     public Resume get(String uuid) {
@@ -74,14 +72,13 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             System.out.println("ERROR------Resume not exist");
         else {
 
-            System.arraycopy(storage,index+1,storage,index,storage.length-size-index);
+            System.arraycopy(storage, index + 1, storage, index, storage.length - size - index);
         }
-//            for (int i = index; i < size; i++) {
-//                storage[i] = storage[i + 1];
-//            }
-//            size--;
-//      }
-
+//                           for (int i = index; i < size; i++) {
+//                        storage[i] = storage[i + 1];          // Handmade delete
+//                         }
+//                        size--;
+//                       }
         size--;
     }
 

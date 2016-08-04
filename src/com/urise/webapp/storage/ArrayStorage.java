@@ -10,26 +10,8 @@ import java.util.Arrays;
 public class ArrayStorage extends AbstractArrayStorage {
 
 
-    public void clear() {
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
-        size = 0;
-    }
 
-    public void save(Resume r) {
-        if (isResumeExist(r))
-            System.out.println("ERROR---------Storage is full");
 
-        else if(getIndex(r.getUuid()) != -1)
-            System.out.println("ERROR------- "+ r.getUuid() +" --Resume allready exist");
-        else {
-            if (size < storageSize)
-                storage[size] = r;
-            size++;
-
-        }
-    }
 
     public Resume get(String uuid) {
 
@@ -42,16 +24,15 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     }
 
-    public void delete(String uuid) {
-        if (getIndex(uuid) == -1)
-            System.out.println("ERROR------Resume not exist");
-        else {
-            storage[getIndex(uuid)] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        }
+    @Override
+    protected void fillDeletedElement(int index) {
+        storage[index] = storage[size - 1];
     }
 
+    @Override
+    protected void insertElement(Resume r, int index) {
+        storage[size] = r;
+    }
 
     /**
      * @return array, contains only Resumes in storage (without null)
@@ -65,17 +46,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         return -1;
     }
 
-//    public void update(Resume r) {
-//
-//        int index = getIndex(r.getUuid());
-//        if (index ==-1){
-//            System.out.println("Resume"+r.getUuid()+"not exist");
-//        } else {
-//            storage[index] = r;
-//        }
 
-
-    // }
 
 
 }

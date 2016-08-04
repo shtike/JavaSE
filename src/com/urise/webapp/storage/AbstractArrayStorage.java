@@ -1,5 +1,8 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -10,7 +13,7 @@ import java.util.Arrays;
 abstract class AbstractArrayStorage implements Storage {
     protected int storageSize = 10000;
     protected Resume[] storage = new Resume[storageSize];
-    int size = 0;
+    protected int size = 0;
 
     public int size() {
         return size;
@@ -26,10 +29,9 @@ abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
 
-        if (getIndex(uuid) == -1) {
-            System.out.println("ERROR----------Resume not exist");
+        if (getIndex(uuid) < 0) {
+            throw new NotExistStorageException(uuid);
 
-            return null;
         } else
             return storage[getIndex(uuid)];
     }
@@ -43,12 +45,10 @@ abstract class AbstractArrayStorage implements Storage {
     }
 
 
-    protected abstract int getIndex(String uuid);
-
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index > 0) {
-            System.out.println("Resume " + r.getUuid() + " not exist");
+            throw new NotExistStorageException(r.getUuid());
         } else {
             storage[index] = r;
         }
@@ -61,5 +61,36 @@ abstract class AbstractArrayStorage implements Storage {
 
 
     }
+
+    public void save(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (isResumeExist(r))
+            throw new StorageException("Storage overflow", r.getUuid());
+
+        else if (getIndex(r.getUuid()) >=0)                 //  !=1
+            throw new ExistStorageException(r.getUuid());
+        else {
+            insertElement(r, index);
+            size++;
+
+        }
+    }
+
+    public void delete(String uuid) {
+        int index = getIndex(uuid);
+        if (getIndex(uuid) < 0)
+            throw new NotExistStorageException(uuid);
+        else {
+            fillDeletedElement(index);
+            storage[size - 1] = null;
+            size--;
+        }
+    }
+
+    protected abstract void fillDeletedElement(int index);
+
+    protected abstract void insertElement(Resume r, int index);
+
+    protected abstract int getIndex(String uuid);
 }
 

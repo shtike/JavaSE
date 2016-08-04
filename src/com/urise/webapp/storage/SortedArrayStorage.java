@@ -1,12 +1,8 @@
 package com.urise.webapp.storage;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
 
 /**
  * Created by Admin on 04.07.16.
@@ -14,84 +10,28 @@ import java.util.Objects;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
 
-    public int binaryInsertByHand(Resume r) {
-        if (storageSize == 0)
-            return -1;
-        int lowerBound = 0;
-        int upperBound = storageSize - 1;
-        int seredina = 0;
-        while (true) {
-            seredina = (upperBound + lowerBound) / 2;
-            if (storage[seredina] == r) {
-                return seredina;
-            } else if (Integer.parseInt(storage[seredina].getUuid()) < Integer.parseInt(r.getUuid())) {
-                lowerBound = seredina + 1; // its in the upper
-                if (lowerBound > upperBound)
-                    return seredina + 1;
-            } else {
-                upperBound = seredina - 1; // its in the lower
-                if (lowerBound > upperBound)
-                    return seredina;
-            }
+    @Override
+    protected void fillDeletedElement(int index) {
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(storage, index + 1, storage, index, numMoved);
         }
     }
 
-
-    public void save(Resume r) {
-        int index = Arrays.binarySearch(storage, 0, size, r);
-        //  int index = binaryInsertByHand(r);
-        if (size == storageSize) {
-            System.out.println("Storage overflow");
-        } else if (index < 0) {
-            index = -index - 1;
-            System.arraycopy(storage, index, storage, index + 1, storage.length - index - 1);
-            storage[index] = r;
-            size++;
-        } else
-            System.out.println("uuid " + r.uuid + " alredy exist!");
-    }
-
-
     @Override
-    public Resume get(String uuid) {
-
-        if (getIndex(uuid) == -1) {
-            System.out.println("ERROR----------Resume not exist");
-            return null;
-        } else
-            return storage[getIndex(uuid)];
-
-
+    protected void insertElement(Resume r, int index) {
+        //      http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
+        int insertIdx = -index - 1;
+        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
+        storage[insertIdx] = r;
     }
-
-
-    @Override
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0)
-            System.out.println("ERROR------Resume not exist");
-        else {
-
-            System.arraycopy(storage, index + 1, storage, index, storage.length - size - index);
-        }
-//                           for (int i = index; i < size; i++) {
-//                        storage[i] = storage[i + 1];          // Handmade delete
-//                         }
-//                        size--;
-//                       }
-        size--;
-    }
-
 
     @Override
     protected int getIndex(String uuid) {
-        Resume searchKey = new Resume();
-        searchKey.setUuid(uuid);
+        Resume searchKey = new Resume(uuid);
+
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 
-    @Override
-    public int size() {
-        return size;
-    }
+
 }

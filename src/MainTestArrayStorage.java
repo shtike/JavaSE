@@ -1,5 +1,4 @@
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.ArrayStorage;
 import com.urise.webapp.storage.SortedArrayStorage;
 import com.urise.webapp.storage.Storage;
 
@@ -11,11 +10,11 @@ public class MainTestArrayStorage {
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
-        r1.uuid = "uuid1";
+
         Resume r2 = new Resume();
-        r2.uuid = "uuid2";
+
         Resume r3 = new Resume();
-        r3.uuid = "uuid3";
+
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);

@@ -2,9 +2,6 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 /**
  * Array based storage for Resumes
  */
@@ -24,6 +21,8 @@ public interface Storage {
 
     void update(Resume r);
     public int size();
+
+    boolean isResumeExist(Resume resume);
 }
 
 

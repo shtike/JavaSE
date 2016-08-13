@@ -39,7 +39,7 @@ public class Resume implements Comparable <Resume>{
 
 
     // Unique identifier
-   private final String uuid;
+   public final String uuid;
 
     @Override
     public String toString() {

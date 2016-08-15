@@ -16,5 +16,8 @@ public class MainReflection {
         System.out.println(field.getName());
         field.get(r);
         System.out.println(r);
+        //TODO: invoke r.toString via reflection
+
+        System.out.println(field.getName()+ field.get(r)+ field.getModifiers()+ field.toString());
     }
 }

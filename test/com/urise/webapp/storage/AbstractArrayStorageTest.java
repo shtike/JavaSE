@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
  */
 public abstract class AbstractArrayStorageTest {
 
-    private Storage storage = new ArrayStorage();
-    private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
+    protected Storage storage = new ArrayStorage();
+    protected static final String UUID_1 = "uuid1";
+    protected static final String UUID_2 = "uuid2";
+    protected static final String UUID_3 = "uuid3";
 
     @Before
     public void setUp() throws Exception{

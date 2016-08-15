@@ -1,5 +1,6 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 /**
@@ -14,8 +15,8 @@ public class ArrayStorage extends AbstractArrayStorage {
     public Resume get(String uuid) {
 
         if (getIndex(uuid) == -1) {
-            System.out.println("ERROR----------Resume not exist");
-            return null;
+            throw new NotExistStorageException(uuid);
+           // return null;
         } else
             return storage[getIndex(uuid)];
 

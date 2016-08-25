@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -9,6 +10,11 @@ import java.util.Arrays;
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
+    public Method poehaliToString(){
+        Resume r = new Resume();
+        Method mo = r.getClass().getDeclaredMethods()[1];
+        return mo;
+    }
 
     @Override
     protected void fillDeletedElement(int index) {

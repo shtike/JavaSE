@@ -1,11 +1,13 @@
 package com.urise.webapp.model;
 
+import java.lang.reflect.Method;
 import java.util.UUID;
 
 /**
  * com.urise.webapp.model.com.urise.webapp.model.Resume class
  */
 public class Resume implements Comparable <Resume>{
+
 
     public Resume(){
         this(UUID.randomUUID().toString());
@@ -31,6 +33,7 @@ public class Resume implements Comparable <Resume>{
 
 
 
+
     @Override
     public int hashCode() {
         return uuid.hashCode();
@@ -51,5 +54,13 @@ public class Resume implements Comparable <Resume>{
         Integer int1 = Integer.parseInt(uuid);
         Integer int2 = Integer.parseInt(o.uuid);
         return int1.compareTo(int2);
+    }
+
+    public Method poehaliToString() {
+
+            Resume r = new Resume();
+            Method mo = r.getClass().getDeclaredMethods()[1];
+            return mo;
+
     }
 }

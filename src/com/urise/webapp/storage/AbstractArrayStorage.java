@@ -20,11 +20,11 @@ abstract class AbstractArrayStorage implements Storage {
     }
 
 
-//    public boolean isResumeExist(Resume r) {
-//        if (size == storageSize)
-//            return true;
-//        else return false;
-//    }
+    public boolean isResumeExist(Resume r) {
+        if (size == storageSize)
+            return true;
+        else return false;
+    }
 
 
     public Resume get(String uuid) {

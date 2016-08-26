@@ -26,7 +26,7 @@ public class MainReflection {
         System.out.println(  m.invoke(r).toString());
 
         System.out.println((r.toString()) + "------------------------------------");
-       // System.out.println((r.poehaliToString()) + "------------------------------------");
+       // System.out.println((r.poehaliToString()) + "-------------------------------------");
 
         //TODO: invoke r.toString via reflection
 

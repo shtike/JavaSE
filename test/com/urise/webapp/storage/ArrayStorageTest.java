@@ -107,7 +107,7 @@ public class ArrayStorageTest extends AbstractArrayStorageTest {
 
     @Test
     public void getIndex() throws Exception {
-        Storage storageTest = new ArrayStorage();////////////////////////////////
+        Storage storageTest = new ArrayStorage();//
         storageTest.save(new Resume(UUID_1));
         storage.get(UUID_1);
         System.out.println(storage.get(UUID_1).getUuid());

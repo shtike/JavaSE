@@ -18,6 +18,10 @@ public class ArrayStorageTest extends AbstractArrayStorageTest {
 
     private java.lang.Object r;
 
+    public ArrayStorageTest() {
+        super(new ArrayStorage());
+    }
+
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() {
         storage.get("dummy");

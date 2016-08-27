@@ -11,22 +11,36 @@ import java.lang.reflect.Method;
  */
 public class MainReflection {
 
-    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
+    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         Resume r = new Resume();
         Field field = r.getClass().getDeclaredFields()[0];
-        Method m = r.getClass().getDeclaredMethods()[1];
-
-        System.out.println(m + "-+-+-+-+-+-");
+        //---------KAK INVOKE SDELAL GRIGORIY------------
+        Class<? extends Resume> resumeClass = r.getClass();
+        field.setAccessible(true);
         System.out.println(field.getName());
+        System.out.println(field.get(r));
+        field.set(r, "new uuid");
+        Method method = resumeClass.getMethod("toString");
+        Object result = method.invoke(r);
+        System.out.println(result);
+
+        //---------KAK INVOKE SDELAL YA------------
+
+
+        Method m = r.getClass().getDeclaredMethods()[1];
+        System.out.println(m + "-+-+-+-+-+-");
+
         field.get(r);
-        System.out.println(r+" This is r resume");
-        System.out.println(m.getName() + "   *************" );
+        System.out.println(r + " This is r resume");
+        System.out.println(m.getName() + "   *************");
         //System.out.println(m.invoke(new Resume(),null));
-        System.out.println(  m.invoke(r).toString());
+        System.out.println(m.invoke(r).toString());
 
         System.out.println((r.toString()) + "------------------------------------");
-       // System.out.println((r.poehaliToString()) + "-------------------------------------");
+
+
+        // System.out.println((r.poehaliToString()) + "-------------------------------------");
 
         //TODO: invoke r.toString via reflection
 

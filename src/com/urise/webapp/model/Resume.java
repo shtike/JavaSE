@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * com.urise.webapp.model.com.urise.webapp.model.Resume class
  */
-public class Resume implements Comparable <Resume>{
+public class Resume {
 
 
     public Resume(){
@@ -44,17 +44,29 @@ public class Resume implements Comparable <Resume>{
     // Unique identifier
    public final String uuid;
 
+    private String fullname; // IMYA i familiy  cheloveka
+
+
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     @Override
     public String toString() {
         return uuid;
     }
 
-    @Override
-    public int compareTo(Resume o) {
-        Integer int1 = Integer.parseInt(uuid);
-        Integer int2 = Integer.parseInt(o.uuid);
-        return int1.compareTo(int2);
-    }
+//    @Override
+//    public int compareTo(Resume o) {
+//        Integer int1 = Integer.parseInt(uuid);
+//        Integer int2 = Integer.parseInt(o.uuid);
+//        return int1.compareTo(int2);
+//    }
 
     public Method poehaliToString() {
 

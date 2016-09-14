@@ -14,11 +14,11 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     public Resume get(String uuid) {
 
-        if (getIndex(uuid) == -1) {
+        if (getSearchKey(uuid) == -1) {
             throw new NotExistStorageException(uuid);
            // return null;
         } else
-            return storage[getIndex(uuid)];
+            return storage[getSearchKey(uuid)];
 
 
     }
@@ -45,13 +45,13 @@ public class ArrayStorage extends AbstractArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    protected int getIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
-        return -1;
+        return Integer.valueOf(-1);
     }
 
 

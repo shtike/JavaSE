@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Admin on 13.08.16.
  */
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
    protected Storage storage = new ArrayStorage();
     protected static final String UUID_1 = "uuid1";
@@ -22,7 +22,7 @@ public abstract class AbstractArrayStorageTest {
     protected static final String UUID_3 = "uuid3";
     protected static final String UUID_4 = "uuid4";
 
-    private static Resume RESUME_1 = new Resume(UUID_1);
+      static Resume RESUME_1 = new Resume(UUID_1);
     private static Resume RESUME_2 = new Resume(UUID_2);
     private static Resume RESUME_3 = new Resume(UUID_3);
     private static Resume RESUME_4 = new Resume(UUID_4);
@@ -35,7 +35,7 @@ public abstract class AbstractArrayStorageTest {
     }
 
 
-    public AbstractArrayStorageTest(Storage storage) {
+    public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
@@ -96,8 +96,8 @@ public abstract class AbstractArrayStorageTest {
         assertSize(2);
         storage.get(UUID_1);
     }
-
-    @Test(expected = StorageException.class)
+//TODO: remain only for Arrays implementations
+    @Test(timeout = 100 ,expected = StorageException.class)
     public void saveOverflow() throws Exception {
         try {
             for (int i = 4; i <= 10000; i++) {

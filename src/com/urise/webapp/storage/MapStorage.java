@@ -1,67 +1,68 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 
 /**
- * Created by Admin on 30.08.16.
+ * Created by Admin on 14.09.16.
  */
-public class MapStorage extends AbstractArrayStorage {
+public class MapStorage extends AbstractStorage{
 
-    Map<String, Resume> resumeMap = new HashMap<>();
-    Resume resume = new Resume();
 
-    public void save(String Resume) {
-        resumeMap.put(resume.getUuid(), resume);
+    private Map<String, Resume> mapFName = new HashMap<>();
+
+
+
+    @Override
+    protected String getSearchKey(String fullname) {
+
+        return String.valueOf(mapFName.get(fullname));
     }
 
-    public void delete(String uuid) {
-        resumeMap.remove(uuid);
+    @Override
+    protected void doUpdate(Resume r, Object searchKey) {
+
     }
 
-    public Resume get(String uuid) {
-        return resumeMap.get(uuid);
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return searchKey != null;
     }
 
-    public void update(Resume r) {
-        for (Map.Entry<String, Resume> entry : resumeMap.entrySet()) {
-            if (entry.getValue() == r) {
-                r = entry.getValue();
-            } else {
-                throw new NotExistStorageException(r.getUuid());
-            }
-        }
-        resumeMap.get(r);
+    @Override
+    protected void doSave(Resume r, Object searchKey) {
+
     }
 
-    public void getAll2() {
-        for (Map.Entry<String, Resume> entry : resumeMap.entrySet()) {
-            entry.getValue();
-        }
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return null;
     }
 
+    @Override
+    protected void doDelete(Object searchKey) {
+
+    }
+
+    @Override
     public void clear() {
-        resumeMap.clear();
-    }
-
-
-    @Override
-    protected void fillDeletedElement(int index) {
 
     }
 
     @Override
-    protected void insertElement(Resume r, int index) {
-
+    public Resume[] getAll() {
+        return new Resume[0];
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    public int size() {
         return 0;
+    }
+
+    @Override
+    public boolean isResumeExist(Resume resume) {
+        return false;
     }
 }

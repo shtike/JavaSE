@@ -4,13 +4,22 @@ import com.urise.webapp.model.Resume;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Created by Admin on 04.07.16.
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
+    //    static class ResumeComparator implements Comparator<Resume> {
+//        @Override
+//        public int compare(Resume o1, Resume o2) {
+//            return o1.getUuid().compareTo(o2.getUuid());
+//        }
+//    }
+    private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
 
-    public Method poehaliToString(){
+
+    public Method poehaliToString() {
         Resume r = new Resume();
         Method mo = r.getClass().getDeclaredMethods()[1];
         return mo;
@@ -33,10 +42,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         Resume searchKey = new Resume(uuid);
 
-        return Arrays.binarySearch(storage, 0, size, searchKey);
+        return Arrays.binarySearch(storage, 0, size, searchKey, RESUME_COMPARATOR);
     }
 
 
@@ -45,4 +54,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
         return false;
     }
+
+
 }

@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected int storageSize = 10000;
     protected Resume[] storage = new Resume[storageSize];
     protected int size = 0;
@@ -26,16 +26,6 @@ abstract class AbstractArrayStorage implements Storage {
         else return false;
     }
 
-
-    public Resume get(String uuid) {
-
-        if (getIndex(uuid) < 0) {
-            throw new NotExistStorageException(uuid);
-
-        } else
-            return storage[getIndex(uuid)];
-    }
-
     @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
@@ -45,13 +35,9 @@ abstract class AbstractArrayStorage implements Storage {
     }
 
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index > 0) {
-            throw new NotExistStorageException(r.getUuid());
-        } else {
-            storage[index] = r;
-        }
+    @Override
+    protected void doUpdate(Resume r, Object index) {
+        storage[(Integer) index] = r;
     }
 
 
@@ -62,35 +48,36 @@ abstract class AbstractArrayStorage implements Storage {
 
     }
 
-    public void save(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (isResumeExist(r))
+    @Override
+    protected void doSave(Resume r, Object index) {
+        if (size== storageSize)                 //  !=1
             throw new StorageException("Storage overflow", r.getUuid());
-
-        else if (getIndex(r.getUuid()) >=0)                 //  !=1
-            throw new ExistStorageException(r.getUuid());
         else {
-            insertElement(r, index);
+            insertElement(r, (Integer)index);
             size++;
-
         }
     }
 
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (getIndex(uuid) < 0)
-            throw new NotExistStorageException(uuid);
-        else {
-            fillDeletedElement(index);
+    @Override
+    public void doDelete( Object index) {
+
+            fillDeletedElement((Integer) index);
             storage[size - 1] = null;
             size--;
-        }
+    }
+    public Resume doGet(Object index) {
+            return storage[(Integer)index];
+    }
+
+    @Override
+    protected boolean isExist(Object index) {
+        return (Integer) index >=0;
     }
 
     protected abstract void fillDeletedElement(int index);
 
     protected abstract void insertElement(Resume r, int index);
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Integer getSearchKey(String uuid);
 }
 

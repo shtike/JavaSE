@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Admin on 13.08.16.
  */
-public class ArrayStorageTest extends AbstractArrayStorageTest {
+public class ArrayStorageTest extends AbstractStorageTest {
 
 
     private java.lang.Object r;

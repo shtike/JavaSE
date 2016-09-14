@@ -25,7 +25,7 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
+    protected void doUpdate(Resume r, Object searchKey ) {
 
         for (Map.Entry<String, Resume> entry : map.entrySet()) {
             if (entry.getValue() == r) {

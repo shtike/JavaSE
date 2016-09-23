@@ -19,11 +19,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
 
 
-    public Method poehaliToString() {
-        Resume r = new Resume();
-        Method mo = r.getClass().getDeclaredMethods()[1];
-        return mo;
-    }
+//    public Method poehaliToString() {
+//        Resume r = new Resume();
+//        Method mo = r.getClass().getDeclaredMethods()[1];
+//        return mo;
+//    }
 
     @Override
     protected void fillDeletedElement(int index) {
@@ -43,7 +43,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected Integer getSearchKey(String uuid) {
-        Resume searchKey = new Resume(uuid);
+        Resume searchKey = new Resume(uuid, "dummy");
 
         return Arrays.binarySearch(storage, 0, size, searchKey, RESUME_COMPARATOR);
     }

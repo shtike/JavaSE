@@ -1,8 +1,6 @@
 package com.urise.webapp;
 
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.ArrayStorage;
-import com.urise.webapp.storage.Storage;
 
 import java.util.*;
 
@@ -11,16 +9,16 @@ import java.util.*;
  */
 public class MainCollections {
     protected static final String UUID_1 = "uuid1";
-    protected static final Resume RESUME_1 = new Resume(UUID_1);
+    protected static final Resume RESUME_1 = new Resume(UUID_1,"Name1" );
 
     protected static final String UUID_2 = "uuid2";
-    protected static final Resume RESUME_2 = new Resume(UUID_2);
+    protected static final Resume RESUME_2 = new Resume(UUID_2,"Name2" );
 
     protected static final String UUID_3 = "uuid3";
-    protected static final Resume RESUME_3 = new Resume(UUID_3);
+    protected static final Resume RESUME_3 = new Resume(UUID_3, "Name3");
 
     protected static final String UUID_4 = "uuid4";
-    protected static final Resume RESUME_4 = new Resume(UUID_4);
+    protected static final Resume RESUME_4 = new Resume(UUID_4,"Name4" );
 
     public static void main(String[] args) {
 

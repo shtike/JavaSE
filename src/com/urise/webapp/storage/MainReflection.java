@@ -13,7 +13,7 @@ public class MainReflection {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
-        Resume r = new Resume();
+        Resume r = new Resume("Name");
         Field field = r.getClass().getDeclaredFields()[0];
         //---------KAK INVOKE SDELAL GRIGORIY------------
         Class<? extends Resume> resumeClass = r.getClass();

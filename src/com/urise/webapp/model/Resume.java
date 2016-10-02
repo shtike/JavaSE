@@ -29,6 +29,10 @@ public class Resume implements Comparable<Resume> {
     public Section getSection(SectionType type) {
         return sections.get(type);
     }
+
+
+
+
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }

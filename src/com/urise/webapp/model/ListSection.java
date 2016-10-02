@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,8 +11,12 @@ public class ListSection extends Section {
 
     private final List<String> items;
 
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
+    }
+
     public ListSection(List<String> items) {
-        Objects.requireNonNull(items,"organizations must not be null");
+        Objects.requireNonNull(items, "organizations must not be null");
         this.items = items;
     }
 
@@ -21,7 +26,7 @@ public class ListSection extends Section {
 
     @Override
     public String toString() {
-        return items.toString() ;
+        return items.toString();
     }
 
     @Override

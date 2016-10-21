@@ -26,37 +26,39 @@ public class MainFile {
                 System.out.println(name);
             }
         }
-//        FileInputStream fis = null;
-//        try {
-//             fis  = new FileInputStream(filepath);
-//            System.out.println(fis.read());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (fis!=null){
-//                try {
-//                    fis.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        }
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(filepath);
+            System.out.println(fis.read());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            printDirectoryDeeply(dir);
+        }
 
         System.out.println("-------------------------------");
-        File dirrecu= new File("D:\\JAVA---PROEKT\\resume-storage\\src");
-        System.out.println( dirrecu.toString());
-        File files[]=dirrecu.listFiles();
-        for (File direccu: files){
-            if (direccu!=null)
-                System.out.println(direccu.getName()+file.isFile());
+    }
 
+    public static void printDirectoryDeeply(File dir) {
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    System.out.println("         File:" + file.getName());
+                } else if (file.isDirectory()) {
+                    System.out.println("Directory:" + file.getName());
+                    printDirectoryDeeply(file);
+                }
+            }
         }
-public static void printDirectoryDeeply(){
-
-        }
-
-
     }
 
 }
+

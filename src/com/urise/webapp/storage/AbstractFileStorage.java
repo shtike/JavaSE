@@ -3,15 +3,15 @@ package com.urise.webapp.storage;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by Admin on 25.09.16.
  */
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public abstract class AbstractFileStorage extends AbstractStorage<File> implements Serializable{
     private File directory;
 
     public AbstractFileStorage(File directory) {
@@ -23,28 +23,40 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         if (!directory.canRead() || !directory.canWrite()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + "is not readable/writable ");
         }
-    this.directory=directory;
+        this.directory = directory;
     }
 
     @Override
     public void clear() {
-directory.delete();
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                doDelete(file);
+            }
+        }
     }
 
     @Override
     public int size() {
-        directory.isFile();
-        return 0;
+        String[] list = directory.list();
+        if (list == null) {
+            throw new StorageException("Directory read error", null);
+        }
+        return list.length;
     }
 
     @Override
     protected File getSearchKey(String uuid) {
-        return new File(directory,uuid );
+        return new File(directory, uuid);
     }
 
     @Override
     protected void doUpdate(Resume r, File file) {
-
+        try {
+            doWrite(r,new BufferedOutputStream(new FileOutputStream(file)));
+        } catch (IOException e) {
+            throw new StorageException("File write error", r.getUuid(), e);
+        }
     }
 
     @Override
@@ -56,27 +68,44 @@ directory.delete();
     protected void doSave(Resume r, File file) {
         try {
             file.createNewFile();
-            doWrite(r,file);
+
         } catch (IOException e) {
-            throw new StorageException("IO error",file.getName(),e);
+            throw new StorageException("Could not create file" + file.getAbsolutePath(), file.getName(), e);
         }
+        doUpdate(r, file);
     }
 
-    protected abstract void doWrite(Resume r, File file);
+    protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
+
+    protected abstract Resume doRead(InputStream is) throws IOException;
 
     @Override
     protected Resume doGet(File file) {
-        return null;
+        try {
+            return doRead(new BufferedInputStream(new FileInputStream(file)));
+        } catch (IOException e) {
+            throw new StorageException("File read error", file.getName(), e);
+        }
     }
 
     @Override
     protected void doDelete(File file) {
-
+        if (!file.delete()) {
+            throw new StorageException("File delete error", file.getName());
+        }
     }
 
     @Override
     protected List<Resume> doCopyAll() {
-        return null;
+        File[] files = directory.listFiles();
+        if (files == null) {
+            throw new StorageException("Directory read error", null);
+        }
+        List<Resume> list = new ArrayList<>(files.length);
+        for (File file : files) {
+            list.add(doGet(file));
+        }
+        return list;
     }
 
 

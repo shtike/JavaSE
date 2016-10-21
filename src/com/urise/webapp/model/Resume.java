@@ -2,6 +2,7 @@ package com.urise.webapp.model;
 
 import sun.swing.SwingUtilities2;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.EnumMap;
 import java.util.Map;
@@ -11,8 +12,8 @@ import java.util.UUID;
 /**
  * com.urise.webapp.model.com.urise.webapp.model.Resume class
  */
-public class Resume implements Comparable<Resume> {
-
+public class Resume implements Comparable<Resume>, Serializable {
+    private static final long serialVersionUID = 1L;
     // Unique identifier
     public final String uuid;
 
@@ -30,7 +31,13 @@ public class Resume implements Comparable<Resume> {
         return sections.get(type);
     }
 
+    public void addContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
 
+    public void addSection(SectionType type, Section section) {
+        sections.put(type, section);
+    }
 
 
     public Resume(String fullName) {
@@ -78,6 +85,7 @@ public class Resume implements Comparable<Resume> {
         int cmp = fullName.compareTo(o.fullName);
         return cmp != 0 ? cmp : uuid.compareTo(o.uuid);
     }
+
 
 //    @Override
 //    public int compareTo(Resume o) {

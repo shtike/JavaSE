@@ -1,18 +1,23 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by Admin on 23.09.16.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Link implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    public final String name;
-    public final String url;
+    public  String name;
+    public  String url;
 
+    public Link() {
+    }
 
     public Link(String name, String url) {
         Objects.requireNonNull(name, "name must not be null");

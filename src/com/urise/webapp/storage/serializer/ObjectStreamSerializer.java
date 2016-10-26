@@ -1,20 +1,21 @@
-package com.urise.webapp.storage;
+package com.urise.webapp.storage.serializer;
 
-import com.sun.xml.internal.txw2.output.StreamSerializer;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.serializer.StreamSerializer1;
-;
+import com.urise.webapp.storage.ObjectStreamStorage;
+import org.omg.CORBA.portable.InputStream;
 
-import java.io.*;
-import java.io.InputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+
+
 
 /**
  * Created by Admin on 09.10.16.
  */
-public class ObjectStreamStorage implements StreamSerializer1 {
-
+public class ObjectStreamSerializer implements StreamSerializer1{
 
 
 
@@ -27,7 +28,7 @@ public class ObjectStreamStorage implements StreamSerializer1 {
     }
 
     @Override
-    public Resume doRead(InputStream is) throws IOException {
+    public Resume doRead(java.io.InputStream is) throws IOException {
         ObjectInputStream ois = new ObjectInputStream(is);
         try {
             return (Resume) ois.readObject();
@@ -39,5 +40,7 @@ public class ObjectStreamStorage implements StreamSerializer1 {
 
 
 
-}
 
+
+
+}

@@ -2,6 +2,7 @@ package com.urise.webapp.exception;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 
 /**
  * Created by Admin on 04.08.16.
@@ -27,6 +28,10 @@ public class StorageException extends RuntimeException implements Serializable{
     public StorageException(String message, String uuid, Exception e) {
         super(message,e);
         this.uuid = uuid;
+    }
+
+    public StorageException(Exception e) {
+        this(e.getMessage(),e);
     }
 
     public String getUuid() {

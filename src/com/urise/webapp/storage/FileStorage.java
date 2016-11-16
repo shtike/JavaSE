@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by Admin on 25.10.16.
+ * Created by Admin on 25.10.16.s
  */
     public class FileStorage extends AbstractStorage<File> implements Serializable {
         private File directory;
@@ -21,10 +21,10 @@ import java.util.Objects;
             this.streamSerializer1=streamSerializer1;
             this.directory = directory;
             if (!directory.isDirectory()) {
-                throw new IllegalArgumentException(directory.getAbsolutePath() + "is not directory");
+                throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
             }
             if (!directory.canRead() || !directory.canWrite()) {
-                throw new IllegalArgumentException(directory.getAbsolutePath() + "is not readable/writable ");
+                throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable ");
             }
             this.directory = directory;
         }

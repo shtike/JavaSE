@@ -22,7 +22,7 @@ public class PathStorage extends AbstractStorage<Path> {
     private   StreamSerializer1 streamSerializer1;
 
 
-    protected PathStorage(String dir, StreamSerializer1 streamSerializer1) {
+    public PathStorage(String dir, StreamSerializer1 streamSerializer1) {
         directory = Paths.get(dir);
         Objects.requireNonNull(dir, "directory must not be null");
         this.streamSerializer1=streamSerializer1;

@@ -12,13 +12,13 @@ import java.io.IOException;
 public class MainFile {
     public static void main(String[] args) {
         String filepath = ".\\.gitignore";
-        File file = new File("D:\\JAVA---PROEKT\\resume-storage");
+        File file = new File(".\\resume-storage");
         try {
-            System.out.println(file.getCanonicalPath());
+            System.out.println(file.getCanonicalPath()+"    "+file.getAbsolutePath());
         } catch (IOException e) {
             throw new RuntimeException("Error", e);
         }
-        File dir = new File("D:\\JAVA---PROEKT\\resume-storage");
+        File dir = new File(".\\resume-storage");
         System.out.println(dir.isDirectory());
         String[] list = dir.list();
         if (list != null) {
@@ -51,7 +51,7 @@ public class MainFile {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    System.out.println(offset + "F: " + file.getName());
+                    System.out.println(offset + "F:          " + file.getName());
                 } else if (file.isDirectory()) {
                     System.out.println(offset + "D :" + file.getName());
                     printDirectoryDeeply(file, offset + " ");

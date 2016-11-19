@@ -9,7 +9,9 @@ import org.junit.Test;
 import java.io.File;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -19,11 +21,12 @@ import static org.junit.Assert.*;
 public abstract class AbstractStorageTest {
 
     public static final File STORAGE_DIR = Config.get().getStorageDir();
-    protected Storage storage = new ArrayStorage();
-    protected static final String UUID_1 = "uuid1";
-    protected static final String UUID_2 = "uuid2";
-    protected static final String UUID_3 = "uuid3";
-    protected static final String UUID_4 = "uuid4";
+    protected Storage storage ;
+
+    protected static final String UUID_1 = UUID.randomUUID().toString();
+    protected static final String UUID_2 = UUID.randomUUID().toString();
+    protected static final String UUID_3 = UUID.randomUUID().toString();
+    protected static final String UUID_4 = UUID.randomUUID().toString();
 
     private static Resume R1 = new Resume(UUID_1, "Name1");
     private static Resume R2 = new Resume(UUID_2, "Name2");
@@ -69,9 +72,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() throws Exception {
         storage.clear();
-        storage.save(new Resume(UUID_1, "Name1"));
-        storage.save(new Resume(UUID_2, "Name2"));
-        storage.save(new Resume(UUID_3, "Name3"));
+        storage.save(R1);
+        storage.save(R2);
+        storage.save(R3);
 
     }
 
@@ -105,7 +108,9 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
-        assertEquals(list, Arrays.asList(R1, R2, R3));
+        List<Resume> sortedResumes = Arrays.asList(R1,R2,R3);
+        Collections.sort(sortedResumes);
+        assertEquals(list, sortedResumes);
 
     }
 
